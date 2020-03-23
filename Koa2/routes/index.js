@@ -1,19 +1,9 @@
 const router = require('koa-router')()
+const user = require('../api/user/index.js')
 
-router.get('/', async (ctx, next) => {
-    await ctx.render('index', {
-        title: 'Hello Koa 2!'
-    })
-})
-
-router.get('/string', async (ctx, next) => {
-    ctx.body = 'koa2 string SueSea'
-})
-
-router.get('/json', async (ctx, next) => {
-    ctx.body = {
-        title: 'koa2 json'
-    }
-})
+router
+    .get('/', user.test)
+    .get('/string', user.string)
+    .get('/json', user.json)
 
 module.exports = router
