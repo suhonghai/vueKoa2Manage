@@ -1,3 +1,10 @@
+/*
+ * @Descripttion: 
+ * @version: 
+ * @Author: SueSea
+ * @LastEditors: SueSea
+ * @LastEditTime: 2020-03-27 16:58:14
+ */
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
@@ -10,7 +17,7 @@ const routes = [
         component: resolve => require(['@/views/Login.vue'], resolve)
     }
 ]
-export const dynamicRouter = [
+const dynamicRouter = [
     {
         path: '/home',
         name: 'Home',

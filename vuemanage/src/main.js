@@ -1,3 +1,10 @@
+/*
+ * @Descripttion: 
+ * @version: 
+ * @Author: SueSea
+ * @LastEditors: SueSea
+ * @LastEditTime: 2020-03-27 17:49:11
+ */
 import Vue from 'vue'
 import App from './App.vue'
 import './registerServiceWorker'
@@ -25,7 +32,7 @@ import {
     DropdownItem,
     Form,
     FormItem,
-    Input
+    Input,
 
 } from 'element-ui';
 Vue.use(Row).use(Col).use(Container).use(Header).use(Main).use(Aside).use(Footer).use(RadioGroup).use(RadioButton).use(Menu).use(Submenu).use(MenuItem).use(MenuItemGroup).use(Dropdown).use(Button).use(DropdownMenu).use(DropdownItem).use(Form).use(FormItem).use(Input)

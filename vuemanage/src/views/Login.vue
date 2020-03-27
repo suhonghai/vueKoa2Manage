@@ -17,6 +17,7 @@
 
 
 <script>
+import { login } from '@/api/login.js'
 export default {
     data() {
         return {
@@ -30,13 +31,13 @@ export default {
         submitForm(formName) {
             this.$refs[formName].validate(valid => {
                 if (valid) {
+                    login(this.ruleForm)
                 } else {
                     return false
                 }
             })
         },
         resetForm(formName) {
-            console.log(formName)
             this.$refs[formName].resetFields()
         }
     }
