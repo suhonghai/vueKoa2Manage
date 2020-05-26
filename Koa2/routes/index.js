@@ -9,9 +9,7 @@ const router = require('koa-router')()
 const user = require('../api/user/index.js')
 
 router
-    .get('/', user.test)
-    .get('/string', user.string)
-    .get('/json', user.json)
     .post('/login', user.login)
+    .post('/regist', user.regist)
 
 module.exports = router

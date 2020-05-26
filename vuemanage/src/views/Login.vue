@@ -5,11 +5,11 @@
                 <el-input type="text" v-model="ruleForm.user" autocomplete="off"></el-input>
             </el-form-item>
             <el-form-item label="密码" prop="pass">
-                <el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
+                <el-input type="password" v-model="ruleForm.password" autocomplete="off"></el-input>
             </el-form-item>
             <el-form-item>
-                <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
-                <el-button @click="resetForm('ruleForm')">重置</el-button>
+                <el-button type="primary" @click="submitForm('ruleForm')">登陆</el-button>
+                <el-button @click="registForm('ruleForm')">注册</el-button>
             </el-form-item>
         </el-form>
     </div>
@@ -17,13 +17,13 @@
 
 
 <script>
-import { login } from '@/api/login.js'
+import { login, regist } from '@/api/login.js'
 export default {
     data() {
         return {
             ruleForm: {
                 user: '',
-                pass: ''
+                password: ''
             }
         }
     },
@@ -32,13 +32,45 @@ export default {
             this.$refs[formName].validate(valid => {
                 if (valid) {
                     login(this.ruleForm)
+                        .then(res => {
+                            console.log(res)
+                            this.$tips({
+                                message: res.message,
+                                type: 'success'
+                            })
+                            this.$router.push('/home')
+                        })
+                        .catch(error => {
+                            this.$tips({
+                                message: error.message,
+                                type: 'error'
+                            })
+                        })
                 } else {
                     return false
                 }
             })
         },
-        resetForm(formName) {
-            this.$refs[formName].resetFields()
+        registForm(formName) {
+            this.$refs[formName].validate(valid => {
+                if (valid) {
+                    regist(this.ruleForm)
+                        .then(res => {
+                            this.$tips({
+                                mseeage: res.message
+                            })
+                            this.$router.push('/home')
+                        })
+                        .catch(error => {
+                            this.$tips({
+                                message: error.message,
+                                type: 'error'
+                            })
+                        })
+                } else {
+                    return false
+                }
+            })
         }
     }
 }

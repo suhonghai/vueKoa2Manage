@@ -33,10 +33,19 @@ import {
     Form,
     FormItem,
     Input,
+    Message
 
 } from 'element-ui';
 Vue.use(Row).use(Col).use(Container).use(Header).use(Main).use(Aside).use(Footer).use(RadioGroup).use(RadioButton).use(Menu).use(Submenu).use(MenuItem).use(MenuItemGroup).use(Dropdown).use(Button).use(DropdownMenu).use(DropdownItem).use(Form).use(FormItem).use(Input)
 
+Vue.prototype.$tips = ({ message, type, duration }) => {
+    Message({
+        duration: duration || 2000,
+        showClose: true,
+        type,
+        message
+    });
+};
 Vue.config.productionTip = false
 
 

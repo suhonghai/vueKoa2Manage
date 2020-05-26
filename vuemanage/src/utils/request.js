@@ -1,16 +1,18 @@
 /* eslint-disable no-console */
 import axios from 'axios'
+import { Loading, message } from 'element-ui';
+var vueLoading;
 
 // 创建axios实例无loading
 const service = axios.create({
     // api的base_url
     baseURL: process.env.VUE_APP_BASE_API,
     // 请求超时时间
-    timeout: 20000
+    timeout: 200000
 })
 
 axios.defaults.baseURL = process.env.VUE_APP_BASE_API
-axios.defaults.timeout = 20000
+axios.defaults.timeout = 200000
 
 axios.defaults.headers = {
     // 'X-Requested-With': 'XMLHttpRequest',
@@ -20,17 +22,16 @@ axios.defaults.headers = {
 
 // request拦截器
 axios.interceptors.request.use(config => {
-    // Toast.loading({
-    //     message: '加载中...',
-    //     forbidClick: true,
-    //     loadingType: 'spinner',
-    //     duration: '10000'
-    // });
+    vueLoading = Loading.service({
+        lock: true,
+        text: '拼命加载中',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+    })
     return config
     // eslint-disable-next-line no-unreachable
 }, error => {
-    // Toast.clear()
-    // Toast.fail(error.message);
+    vueLoading.close()
     // eslint-disable-next-line no-console
     console.log('...request,error')
     // Do something with request error
@@ -38,11 +39,16 @@ axios.interceptors.request.use(config => {
 })
 // noloading
 service.interceptors.request.use(config => {
+    vueLoading = Loading.service({
+        lock: true,
+        text: '拼命加载中',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+    })
     return config
     // eslint-disable-next-line no-unreachable
 }, error => {
-    // Toast.clear()
-    // Toast.fail(error.message);
+    vueLoading.close()
     // eslint-disable-next-line no-console
     console.log('...request,error')
     // Do something with request error
@@ -51,7 +57,9 @@ service.interceptors.request.use(config => {
 // respone拦截器
 axios.interceptors.response.use(
     response => {
-        // Toast.clear()
+        setTimeout(() => {
+            vueLoading.close()
+        }, 100)
         console.log('come in response')
         return response
     },
